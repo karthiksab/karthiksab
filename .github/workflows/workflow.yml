@@ -1,12 +1,8 @@
-name: Trigger auto deployment for demo-container
+name: Deploy FastAPI on Azure
 
 # When this action will be executed
 on:
   # Automatically trigger it when detected changes in repo. Remove comments to enable
-  #push:
-  #  branches: 
-  #    [ main ]
-
   # Allow mannually trigger 
   workflow_dispatch:      
 
@@ -37,5 +33,3 @@ jobs:
           push: true
           tags: karthiksab.azurecr.io/${{ env.REPO }}:${{ github.sha }}
           file: ./Dockerfile
-
-  
