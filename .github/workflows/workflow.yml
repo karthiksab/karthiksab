@@ -1,0 +1,41 @@
+name: Trigger auto deployment for demo-container
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo. Remove comments to enable
+  #push:
+  #  branches: 
+  #    [ main ]
+
+  # Allow mannually trigger 
+  workflow_dispatch:      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub container registry
+        uses: docker/login-action@v1.10.0
+        with:
+          registry: karthiksab.azurecr.io
+          username: ${{ secrets.az_username }}
+          password: ${{ secrets.az_password }}
+
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+      - name: Build and push container image to azure registry
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: karthiksab.azurecr.io/${{ env.REPO }}:${{ github.sha }}
+          file: ./Dockerfile
+
+  
