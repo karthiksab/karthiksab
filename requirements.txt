@@ -1,0 +1,19 @@
+langchain
+langchain_openai
+streamlit
+streamlit_feedback
+openai
+python-dotenv
+streamlit-ace
+google.cloud
+google-cloud-aiplatform
+pyvis 
+matplotlib
+path
+flair
+genbit
+language_tool_python
+dvc
+# install git and dvc
+# git init
+# dvc init
