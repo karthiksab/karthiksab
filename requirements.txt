@@ -17,3 +17,7 @@ dvc
 # install git and dvc
 # git init
 # dvc init
+# git commit -m "commiting first version"
+# dvc add new
+# git add -all
+# git commit - m "dvc files"
